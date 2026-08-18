@@ -1,748 +1,879 @@
-<!DOCTYPE html>
-<html lang="en">
+/* =========================================
+   UPFUEL — MAIN STYLES
+========================================= */
 
-<head>
+:root {
 
-    <meta charset="UTF-8">
+    --black: #000000;
+    --dark-gray: #151515;
+    --gray: #3a3a3a;
+    --light-gray: #999999;
+    --white: #ffffff;
+    --pink: #ff2d8d;
+    --pink-light: #ff6eae;
+    --border: #292929;
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+}
 
-    <title>UpFuel</title>
 
-    <link rel="stylesheet" href="style.css">
+* {
 
-</head>
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 
+}
 
-<body>
 
-    <main id="app">
+html {
 
+    min-height: 100%;
 
-        <!-- =========================
-             INTRO SCREEN
-        ========================= -->
+}
 
-        <section
-            id="introScreen"
-            class="screen active"
-        >
 
-            <div class="intro-content">
+body {
 
-                <div class="logo-container">
+    background: var(--black);
+    color: var(--white);
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
 
-                    <h1 class="logo">
-                        UPFUEL
-                    </h1>
+}
 
-                </div>
 
+button {
 
-                <div class="intro-tagline">
+    font-family: inherit;
+    cursor: pointer;
 
-                    <h2>
-                        FUEL YOUR BODY.
-                    </h2>
+}
 
-                    <h2>
-                        POWER YOUR TRAINING.
-                    </h2>
 
-                </div>
+input,
+select,
+textarea {
 
+    font-family: inherit;
 
-                <button
-                    id="introNextBtn"
-                    class="primary-btn"
-                >
-                    LET'S GO
-                </button>
+}
 
-            </div>
 
-        </section>
+#app {
 
+    min-height: 100vh;
+    background: var(--black);
 
+}
 
-        <!-- =========================
-             MAIN APP
-        ========================= -->
 
-        <section
-            id="mainApp"
-            class="screen"
-        >
+/* =========================================
+   SCREENS
+========================================= */
 
+.screen {
 
-            <!-- HEADER -->
+    display: none;
+    min-height: 100vh;
 
-            <header class="app-header">
+}
 
-                <div>
 
-                    <h1>
-                        UPFUEL
-                    </h1>
+.screen.active {
 
-                    <p>
-                        Fuel your body. Power your training.
-                    </p>
+    display: flex;
 
-                </div>
+}
 
-            </header>
 
+/* =========================================
+   INTRO
+========================================= */
 
+#introScreen {
 
-            <!-- =========================
-                 HOME
-            ========================= -->
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: var(--black);
+    padding: 30px;
 
-            <div
-                id="homePage"
-                class="page app-page active"
-            >
+}
 
-                <section class="welcome-section">
 
-                    <p class="small-label">
-                        TODAY
-                    </p>
+.intro-content {
 
-                    <h2>
-                        Ready to fuel up?
-                    </h2>
+    width: 100%;
+    max-width: 600px;
 
-                    <p>
-                        Let's support your body, training,
-                        and recovery today.
-                    </p>
+}
 
-                </section>
 
+.logo-container {
 
+    margin-bottom: 35px;
 
-                <section
-                    class="dashboard-card focus-card"
-                >
+}
 
-                    <p class="small-label">
-                        TODAY'S FUEL FOCUS
-                    </p>
 
-                    <h3>
-                        Fuel your training.
-                    </h3>
+.logo {
 
-                    <p>
-                        Give your body the energy and
-                        nutrients it needs to train,
-                        perform, and recover.
-                    </p>
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 900;
+    letter-spacing: 8px;
+    color: var(--white);
 
-                </section>
+}
 
 
+.logo::after {
 
-                <!-- HOME STATS -->
+    content: ".";
+    color: var(--pink);
 
-                <section class="dashboard-grid">
+}
 
 
-                    <div class="dashboard-card stat-card">
+.intro-tagline {
 
-                        <span class="stat-icon">
-                            🥗
-                        </span>
+    margin-bottom: 45px;
 
-                        <p class="small-label">
-                            FOOD VARIETY
-                        </p>
+}
 
-                        <h3 id="homeFoodVariety">
-                            0 foods
-                        </h3>
 
-                    </div>
+.intro-tagline h2 {
 
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 8px 0;
 
+}
 
-                    <div class="dashboard-card stat-card">
 
-                        <span class="stat-icon">
-                            ⭐
-                        </span>
+.intro-tagline h2:last-child {
 
-                        <p class="small-label">
-                            FAVORITES
-                        </p>
+    color: var(--pink);
 
-                        <h3 id="homeFavorites">
-                            0 foods
-                        </h3>
+}
 
-                    </div>
 
+/* =========================================
+   BUTTONS
+========================================= */
 
+.primary-btn,
+.secondary-btn {
 
-                    <div class="dashboard-card stat-card">
+    border: none;
+    background: var(--gray);
+    color: var(--white);
+    border-radius: 12px;
+    font-weight: 800;
+    letter-spacing: .5px;
+    transition: .2s ease;
 
-                        <span class="stat-icon">
-                            💪
-                        </span>
+}
 
-                        <p class="small-label">
-                            TRAINING
-                        </p>
 
-                        <h3>
-                            Ready
-                        </h3>
+.primary-btn {
 
-                    </div>
+    padding: 16px 35px;
+    font-size: 1rem;
 
+}
 
 
-                    <div class="dashboard-card stat-card">
+.secondary-btn {
 
-                        <span class="stat-icon">
-                            ⚡
-                        </span>
+    padding: 13px 20px;
+    font-size: .85rem;
+    margin-top: 15px;
 
-                        <p class="small-label">
-                            FUEL CHECK
-                        </p>
+}
 
-                        <h3 id="homeFuelStatus">
-                            Not checked
-                        </h3>
 
-                    </div>
+.primary-btn:hover,
+.secondary-btn:hover {
 
-                </section>
+    background: var(--pink);
+    transform: translateY(-2px);
 
+}
 
 
-                <!-- UPLIFT CONNECTION -->
+/* =========================================
+   MAIN APP
+========================================= */
 
-                <section class="dashboard-card uplift-card">
+#mainApp {
 
-                    <p class="small-label">
-                        CONNECTED TRAINING
-                    </p>
+    flex-direction: column;
+    background: var(--black);
 
-                    <h3>
-                        UpLift
-                    </h3>
+}
 
-                    <p>
-                        Your training information can connect
-                        with your fueling plan.
-                    </p>
 
-                    <button
-                        class="secondary-btn"
-                        id="viewTrainingBtn"
-                    >
-                        VIEW TRAINING
-                    </button>
+/* =========================================
+   HEADER
+========================================= */
 
-                </section>
+.app-header {
 
+    padding: 25px;
+    border-bottom: 1px solid #242424;
 
+}
 
-                <!-- QUICK ACTIONS -->
 
-                <section class="quick-actions">
+.app-header h1 {
 
-                    <p class="small-label">
-                        QUICK ACTIONS
-                    </p>
+    color: var(--white);
+    letter-spacing: 3px;
+    font-size: 1.8rem;
 
+}
 
-                    <div class="quick-action-grid">
 
+.app-header h1::after {
 
-                        <button
-                            class="secondary-btn"
-                            data-page="foodPage"
-                        >
-                            🥗 FOOD EXPLORER
-                        </button>
+    content: ".";
+    color: var(--pink);
 
+}
 
-                        <button
-                            class="secondary-btn"
-                            data-page="familiesPage"
-                        >
-                            🧩 FOOD FAMILIES
-                        </button>
 
+.app-header p {
 
-                        <button
-                            class="secondary-btn"
-                            data-page="mealPage"
-                        >
-                            🍽️ MEAL BUILDER
-                        </button>
+    margin-top: 5px;
+    color: var(--light-gray);
+    font-size: .9rem;
 
+}
 
-                        <button
-                            class="secondary-btn"
-                            data-page="preCheerPage"
-                        >
-                            ⚡ PRE-CHEER FUEL
-                        </button>
 
+/* =========================================
+   PAGES
+========================================= */
 
-                        <button
-                            class="secondary-btn"
-                            data-page="recoveryPage"
-                        >
-                            🔄 RECOVERY FUEL
-                        </button>
+.page {
 
+    padding: 25px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
 
-                        <button
-                            class="secondary-btn"
-                            data-page="checkinPage"
-                        >
-                            📋 FUEL CHECK-IN
-                        </button>
+}
 
 
-                        <button
-                            class="secondary-btn"
-                            data-page="progressPage"
-                        >
-                            📊 PROGRESS
-                        </button>
+.app-page {
 
-                    </div>
+    display: none;
+    animation: pageFade .25s ease;
 
-                </section>
+}
 
-            </div>
 
+.app-page.active {
 
+    display: block;
 
-            <!-- =========================
-                 FOOD EXPLORER
-            ========================= -->
+}
 
-            <div
-                id="foodPage"
-                class="page app-page"
-            >
 
-                <p class="small-label">
-                    FOOD EXPLORER
-                </p>
+.page h2 {
 
-                <h2>
-                    Find your foods.
-                </h2>
+    font-size: 2rem;
+    margin: 5px 0 10px;
 
-                <p class="page-description">
-                    Explore foods by family and build
-                    your personal food library.
-                </p>
+}
 
 
-                <input
-                    type="text"
-                    id="foodSearch"
-                    class="app-input"
-                    placeholder="Search foods..."
-                >
+.page-description {
 
+    color: var(--light-gray);
+    line-height: 1.5;
+    margin-bottom: 25px;
 
-                <div
-                    id="foodFamilyButtons"
-                    class="food-family-buttons"
-                >
-                </div>
+}
 
 
-                <div
-                    id="foodList"
-                    class="food-list"
-                >
-                </div>
+/* =========================================
+   WELCOME
+========================================= */
 
-            </div>
+.welcome-section {
 
+    margin-bottom: 25px;
 
+}
 
-            <!-- =========================
-                 FOOD FAMILIES
-            ========================= -->
 
-            <div
-                id="familiesPage"
-                class="page app-page"
-            >
+.welcome-section h2 {
 
-                <p class="small-label">
-                    FOOD FAMILIES
-                </p>
+    font-size: 2rem;
+    margin: 5px 0 10px;
 
-                <h2>
-                    Build your variety.
-                </h2>
+}
 
-                <p class="page-description">
-                    Explore different food families
-                    and find options that work for you.
-                </p>
 
+.welcome-section p:last-child {
 
-                <div
-                    id="familyCards"
-                    class="family-cards"
-                >
-                </div>
+    color: var(--light-gray);
+    line-height: 1.5;
 
-            </div>
+}
 
 
+/* =========================================
+   LABELS
+========================================= */
 
-            <!-- =========================
-                 MEAL BUILDER
-            ========================= -->
+.small-label {
 
-            <div
-                id="mealPage"
-                class="page app-page"
-            >
+    color: var(--pink);
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: 2px;
 
-                <p class="small-label">
-                    MEAL BUILDER
-                </p>
+}
 
-                <h2>
-                    Build a meal.
-                </h2>
 
-                <p class="page-description">
-                    Put together foods that feel comfortable
-                    and work for your training.
-                </p>
+/* =========================================
+   CARDS
+========================================= */
 
+.dashboard-card {
 
-                <section class="dashboard-card">
+    background: var(--dark-gray);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 18px;
 
-                    <label for="mealName">
-                        Meal name
-                    </label>
+}
 
 
-                    <input
-                        type="text"
-                        id="mealName"
-                        class="app-input"
-                        placeholder="Example: Practice snack"
-                    >
+.dashboard-card h3 {
 
+    font-size: 1.25rem;
+    margin: 8px 0;
 
-                    <h3>
-                        Add foods
-                    </h3>
+}
 
 
-                    <div id="mealFoodOptions">
-                    </div>
+.dashboard-card p:not(.small-label) {
 
+    color: var(--light-gray);
+    line-height: 1.5;
 
-                    <button
-                        class="secondary-btn"
-                        id="saveMealBtn"
-                    >
-                        SAVE MEAL
-                    </button>
+}
 
-                </section>
 
+.focus-card {
 
-                <section class="dashboard-card">
+    border-left: 4px solid var(--pink);
 
-                    <p class="small-label">
-                        SAVED MEALS
-                    </p>
+}
 
 
-                    <div id="savedMeals">
-                    </div>
+.uplift-card {
 
-                </section>
+    border-top: 2px solid var(--pink);
 
-            </div>
+}
 
 
+/* =========================================
+   STATS
+========================================= */
 
-            <!-- =========================
-                 PRE-CHEER FUEL
-            ========================= -->
+.dashboard-grid {
 
-            <div
-                id="preCheerPage"
-                class="page app-page"
-            >
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-bottom: 18px;
 
-                <p class="small-label">
-                    PRE-CHEER FUEL
-                </p>
+}
 
-                <h2>
-                    Fuel your practice.
-                </h2>
 
-                <p class="page-description">
-                    Choose an option based on how soon
-                    you're training.
-                </p>
+.dashboard-grid .dashboard-card {
 
+    margin-bottom: 0;
 
-                <div class="fuel-time-grid">
+}
 
 
-                    <button
-                        class="secondary-btn fuel-time-btn"
-                        data-time="soon"
-                    >
-                        TRAINING SOON
-                    </button>
+.stat-card {
 
+    min-height: 150px;
 
-                    <button
-                        class="secondary-btn fuel-time-btn"
-                        data-time="later"
-                    >
-                        1–3 HOURS
-                    </button>
+}
 
 
-                    <button
-                        class="secondary-btn fuel-time-btn"
-                        data-time="meal"
-                    >
-                        MORE TIME
-                    </button>
+.stat-icon {
 
-                </div>
+    display: block;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
 
+}
 
-                <div id="preCheerResults">
-                </div>
 
-            </div>
+/* =========================================
+   QUICK ACTIONS
+========================================= */
 
+.quick-actions {
 
+    margin-top: 30px;
 
-            <!-- =========================
-                 RECOVERY FUEL
-            ========================= -->
+}
 
-            <div
-                id="recoveryPage"
-                class="page app-page"
-            >
 
-                <p class="small-label">
-                    RECOVERY FUEL
-                </p>
+.quick-action-grid {
 
-                <h2>
-                    Recover strong.
-                </h2>
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 12px;
 
-                <p class="page-description">
-                    Support recovery after training
-                    with foods you feel comfortable eating.
-                </p>
+}
 
 
-                <div id="recoveryOptions">
-                </div>
+.quick-action-grid .secondary-btn {
 
-            </div>
+    margin-top: 0;
+    min-height: 55px;
 
+}
 
 
-            <!-- =========================
-                 FUEL CHECK-IN
-            ========================= -->
+/* =========================================
+   INPUTS
+========================================= */
 
-            <div
-                id="checkinPage"
-                class="page app-page"
-            >
+.app-input {
 
-                <p class="small-label">
-                    FUEL CHECK-IN
-                </p>
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--dark-gray);
+    color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    outline: none;
+    margin: 8px 0 18px;
 
-                <h2>
-                    How are you doing?
-                </h2>
+}
 
 
-                <section class="dashboard-card">
+.app-input:focus {
 
+    border-color: var(--pink);
 
-                    <label class="checkin-option">
+}
 
-                        <input
-                            type="checkbox"
-                            id="beforeTrainingCheck"
-                        >
 
-                        I fueled before training.
+.app-input::placeholder {
 
-                    </label>
+    color: #777777;
 
+}
 
 
-                    <label class="checkin-option">
+/* =========================================
+   FOOD FAMILIES
+========================================= */
 
-                        <input
-                            type="checkbox"
-                            id="afterTrainingCheck"
-                        >
+.food-family-buttons {
 
-                        I had something after training.
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 5px 0 15px;
 
-                    </label>
+}
 
 
+.food-family-buttons::-webkit-scrollbar {
 
-                    <label class="checkin-option">
+    display: none;
 
-                        <input
-                            type="checkbox"
-                            id="energyCheck"
-                        >
+}
 
-                        I checked in with my energy.
 
-                    </label>
+.family-filter-btn {
 
+    white-space: nowrap;
+    background: var(--gray);
+    color: var(--white);
+    border: none;
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-weight: 700;
 
+}
 
-                    <button
-                        class="secondary-btn"
-                        id="saveCheckinBtn"
-                    >
-                        SAVE CHECK-IN
-                    </button>
 
-                </section>
+.family-filter-btn.active {
 
-            </div>
+    background: var(--pink);
 
+}
 
 
-            <!-- =========================
-                 PROGRESS
-            ========================= -->
+.family-cards {
 
-            <div
-                id="progressPage"
-                class="page app-page"
-            >
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
 
-                <p class="small-label">
-                    PROGRESS
-                </p>
+}
 
-                <h2>
-                    Your progress.
-                </h2>
 
+.family-card {
 
-                <section class="dashboard-card">
+    background: var(--dark-gray);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px;
+    cursor: pointer;
+    transition: .2s ease;
 
-                    <h3>
-                        Food Families
-                    </h3>
+}
 
 
-                    <div id="familyProgress">
-                    </div>
+.family-card:hover {
 
-                </section>
+    border-color: var(--pink);
+    transform: translateY(-2px);
 
+}
 
-                <section class="dashboard-card">
 
-                    <h3>
-                        Fuel Check-In
-                    </h3>
+.family-card h3 {
 
+    margin-bottom: 7px;
 
-                    <p id="progressCheckin">
-                        No check-in yet.
-                    </p>
+}
 
-                </section>
 
-            </div>
+.family-card p {
 
+    color: var(--light-gray);
+    font-size: .9rem;
+    line-height: 1.4;
 
+}
 
-            <!-- =========================
-                 PROFILE
-            ========================= -->
 
-            <div
-                id="profilePage"
-                class="page app-page"
-            >
+/* =========================================
+   FOOD ITEMS
+========================================= */
 
-                <p class="small-label">
-                    PROFILE
-                </p>
+.food-list {
 
-                <h2>
-                    Your UpFuel profile.
-                </h2>
+    margin-top: 10px;
 
+}
 
-                <section class="dashboard-card">
 
-                    <h3>
-                        Athlete Profile
-                    </h3>
+.food-item {
 
-                    <p>
-                        Your preferences and fueling information
-                        will live here.
-                    </p>
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: var(--dark-gray);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 15px;
+    margin-bottom: 10px;
 
-                </section>
+}
 
-            </div>
 
+.food-info h3 {
 
-        </section>
+    margin-bottom: 4px;
 
-    </main>
+}
 
 
+.food-info p {
 
-    <!-- DATA FIRST -->
+    color: var(--light-gray);
+    font-size: .85rem;
 
-    <script src="data/foods.js"></script>
+}
 
-    <!-- APP LOGIC SECOND -->
 
-    <script src="script.js"></script>
+.food-actions {
 
+    display: flex;
+    align-items: center;
+    gap: 5px;
 
-</body>
+}
 
-</html>
+
+.favorite-btn {
+
+    background: transparent;
+    color: #777777;
+    font-size: 1.3rem;
+    padding: 7px;
+
+}
+
+
+.favorite-btn.favorite {
+
+    color: var(--pink);
+
+}
+
+
+.food-status {
+
+    color: var(--pink);
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+
+}
+
+
+/* =========================================
+   MEAL BUILDER
+========================================= */
+
+.meal-food-option {
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #202020;
+    border-radius: 12px;
+    padding: 10px;
+    margin: 8px 0;
+
+}
+
+
+.meal-food-option input {
+
+    width: 20px;
+    height: 20px;
+    accent-color: var(--pink);
+
+}
+
+
+.saved-meal {
+
+    background: #202020;
+    border-left: 4px solid var(--pink);
+    padding: 15px;
+    border-radius: 12px;
+    margin: 10px 0;
+
+}
+
+
+/* =========================================
+   PRE-CHEER
+========================================= */
+
+.fuel-time-grid {
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+
+}
+
+
+.fuel-time-btn {
+
+    margin: 0;
+    min-height: 60px;
+
+}
+
+
+.fuel-result {
+
+    background: var(--dark-gray);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--pink);
+    border-radius: 15px;
+    padding: 18px;
+    margin: 12px 0;
+
+}
+
+
+/* =========================================
+   RECOVERY
+========================================= */
+
+.recovery-option {
+
+    background: var(--dark-gray);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 18px;
+    margin: 12px 0;
+
+}
+
+
+.recovery-option h3 {
+
+    margin-bottom: 7px;
+
+}
+
+
+/* =========================================
+   CHECK-IN
+========================================= */
+
+.checkin-option {
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #202020;
+    border-radius: 12px;
+    padding: 14px;
+    margin: 10px 0;
+    cursor: pointer;
+
+}
+
+
+.checkin-option input {
+
+    width: 20px;
+    height: 20px;
+    accent-color: var(--pink);
+
+}
+
+
+/* =========================================
+   PROGRESS
+========================================= */
+
+.family-progress-item {
+
+    margin: 15px 0;
+
+}
+
+
+.family-progress-label {
+
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+
+}
+
+
+.progress-bar {
+
+    width: 100%;
+    height: 12px;
+    background: #303030;
+    border-radius: 20px;
+    overflow: hidden;
+
+}
+
+
+.progress-fill {
+
+    height: 100%;
+    border-radius: 20px;
+    background: var(--pink);
+    transition: width .3s ease;
+
+}
+
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+@keyframes pageFade {
+
+    from {
+
+        opacity: 0;
+        transform: translateY(5px);
+
+    }
+
+    to {
+
+        opacity: 1;
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .page {
+
+        padding: 20px;
+
+    }
+
+
+    .dashboard-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .quick-action-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .family-cards {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .fuel-time-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .food-item {
+
+        align-items: flex-start;
+
+    }
+
+}
