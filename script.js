@@ -1,101 +1,11 @@
 /* =========================================
    UPFUEL — APP LOGIC
-   ========================================= */
-
-
-/* =========================================
-   DATA
-   ========================================= */
-
-const foodFamilies = {
-
-    "Proteins": [
-        "Chicken",
-        "Turkey",
-        "Eggs",
-        "Greek Yogurt",
-        "Cheese",
-        "Tofu",
-        "Beans",
-        "Peanut Butter"
-    ],
-
-"Fruits": [
-    "Banana",
-    "Apple",
-    "Strawberries",
-    "Blueberries",
-    "Raspberries",
-    "Cherries",
-    "Grapes",
-    "Mango",
-    "Orange",
-    "Watermelon"
-],
-
-    "Vegetables": [
-        "Carrots",
-        "Cucumber",
-        "Broccoli",
-        "Corn",
-        "Peas",
-        "Sweet Potato",
-        "Bell Pepper",
-        "Spinach"
-    ],
-
-    "Grains & Carbs": [
-        "Rice",
-        "Pasta",
-        "Bread",
-        "Bagel",
-        "Oatmeal",
-        "Cereal",
-        "Potatoes",
-        "Crackers"
-    ],
-
-    "Dairy & Alternatives": [
-        "Milk",
-        "Chocolate Milk",
-        "Yogurt",
-        "Cheese",
-        "Cottage Cheese",
-        "Soy Milk"
-    ],
-
-    "Fats": [
-        "Avocado",
-        "Peanut Butter",
-        "Almond Butter",
-        "Olive Oil",
-        "Cheese",
-        "Nuts"
-    ],
-
-    "Snack Foods": [
-        "Granola Bar",
-        "Pretzels",
-        "Crackers",
-        "Popcorn",
-        "Trail Mix",
-        "Fruit Snacks"
-    ],
-
-    "Drinks": [
-        "Water",
-        "Milk",
-        "Smoothie",
-        "Juice",
-        "Sports Drink"
-    ]
-
-};
+========================================= */
 
 
 /* =========================================
    STORAGE
-   ========================================= */
+========================================= */
 
 let upfuelData = JSON.parse(
     localStorage.getItem("upfuelData")
@@ -132,7 +42,7 @@ function saveData() {
 
 /* =========================================
    INTRO
-   ========================================= */
+========================================= */
 
 const introScreen =
     document.getElementById("introScreen");
@@ -157,7 +67,7 @@ introNextBtn.addEventListener("click", () => {
 
 /* =========================================
    NAVIGATION
-   ========================================= */
+========================================= */
 
 function showPage(pageId) {
 
@@ -205,7 +115,7 @@ document.querySelectorAll("[data-page]")
 
 /* =========================================
    HOME
-   ========================================= */
+========================================= */
 
 function renderHome() {
 
@@ -252,15 +162,18 @@ function renderHome() {
         completed === 0
             ? "Not checked"
             : `${completed}/3`;
+
 }
 
 
 /* =========================================
    FOOD FAMILY BUTTONS
-   ========================================= */
+========================================= */
 
 const foodFamilyButtons =
-    document.getElementById("foodFamilyButtons");
+    document.getElementById(
+        "foodFamilyButtons"
+    );
 
 
 function renderFamilyButtons() {
@@ -355,7 +268,7 @@ function setActiveFamilyButton(button) {
 
 /* =========================================
    FOOD EXPLORER
-   ========================================= */
+========================================= */
 
 const foodSearch =
     document.getElementById("foodSearch");
@@ -402,15 +315,20 @@ function getAllFoods() {
 function renderFoods(selectedFamily = null) {
 
     const foodList =
-        document.getElementById("foodList");
+        document.getElementById(
+            "foodList"
+        );
 
 
     let foods =
         selectedFamily
             ? foodFamilies[selectedFamily]
                 .map(food => ({
+
                     name: food,
+
                     family: selectedFamily
+
                 }))
             : getAllFoods();
 
@@ -438,10 +356,19 @@ function renderFoods(selectedFamily = null) {
     if (foods.length === 0) {
 
         foodList.innerHTML = `
+
             <section class="dashboard-card">
-                <h3>No foods found</h3>
-                <p>Try another search.</p>
+
+                <h3>
+                    No foods found
+                </h3>
+
+                <p>
+                    Try another search.
+                </p>
+
             </section>
+
         `;
 
         return;
@@ -485,35 +412,53 @@ function renderFoods(selectedFamily = null) {
                 ${
                     status !== "unrated"
                     ? `
+
                         <span class="food-status">
+
                             ${status}
+
                         </span>
+
                     `
                     : ""
                 }
 
             </div>
 
+
             <div class="food-actions">
 
                 <button
+
                     class="favorite-btn ${
                         isFavorite
                             ? "favorite"
                             : ""
                     }"
+
                     data-food="${food.name}"
+
                 >
+
                     ★
+
                 </button>
 
+
                 <button
+
                     class="secondary-btn"
+
                     data-comfort="${food.name}"
+
                 >
-                    ${status === "comfortable"
-                        ? "COMFORTABLE"
-                        : "SET"}
+
+                    ${
+                        status === "comfortable"
+                            ? "COMFORTABLE"
+                            : "SET"
+                    }
+
                 </button>
 
             </div>
@@ -546,7 +491,7 @@ function renderFoods(selectedFamily = null) {
 
 /* =========================================
    FAVORITES
-   ========================================= */
+========================================= */
 
 function toggleFavorite(food) {
 
@@ -559,7 +504,9 @@ function toggleFavorite(food) {
 
         upfuelData.favorites.push(food);
 
-    } else {
+    }
+
+    else {
 
         upfuelData.favorites.splice(
             index,
@@ -580,7 +527,7 @@ function toggleFavorite(food) {
 
 /* =========================================
    FOOD STATUS
-   ========================================= */
+========================================= */
 
 function cycleFoodStatus(food) {
 
@@ -633,7 +580,7 @@ function cycleFoodStatus(food) {
 
 /* =========================================
    FOOD FAMILIES PAGE
-   ========================================= */
+========================================= */
 
 function renderFamilyCards() {
 
@@ -689,6 +636,7 @@ function renderFamilyCards() {
 
                     foodSearch.value = "";
 
+
                     document.querySelectorAll(
                         ".family-filter-btn"
                     ).forEach(btn => {
@@ -696,6 +644,7 @@ function renderFamilyCards() {
                         btn.classList.remove(
                             "active"
                         );
+
 
                         if (
                             btn.textContent === family
@@ -725,7 +674,7 @@ function renderFamilyCards() {
 
 /* =========================================
    MEAL BUILDER
-   ========================================= */
+========================================= */
 
 function renderMealFoodOptions() {
 
@@ -751,8 +700,11 @@ function renderMealFoodOptions() {
         label.innerHTML = `
 
             <input
+
                 type="checkbox"
+
                 value="${food.name}"
+
             >
 
             <span>
@@ -786,9 +738,11 @@ function saveMeal() {
 
 
     const foods =
-        [...document.querySelectorAll(
-            "#mealFoodOptions input:checked"
-        )].map(
+        [
+            ...document.querySelectorAll(
+                "#mealFoodOptions input:checked"
+            )
+        ].map(
             input => input.value
         );
 
@@ -814,6 +768,7 @@ function saveMeal() {
 
 
     saveData();
+
 
     document.getElementById(
         "mealName"
@@ -890,7 +845,7 @@ function renderSavedMeals() {
 
 /* =========================================
    PRE-CHEER FUEL
-   ========================================= */
+========================================= */
 
 const preCheerIdeas = {
 
@@ -1015,7 +970,7 @@ function renderPreCheer(time) {
 
 /* =========================================
    RECOVERY
-   ========================================= */
+========================================= */
 
 function renderRecoveryOptions() {
 
@@ -1028,18 +983,30 @@ function renderRecoveryOptions() {
     const options = [
 
         {
+
             title: "Protein + Carbohydrate",
-            text: "Try pairing a protein food with a carbohydrate food you enjoy."
+
+            text:
+                "Try pairing a protein food with a carbohydrate food you enjoy."
+
         },
 
         {
+
             title: "Easy Snack",
-            text: "Choose a familiar snack such as yogurt and fruit, cereal and milk, or a sandwich."
+
+            text:
+                "Choose a familiar snack such as yogurt and fruit, cereal and milk, or a sandwich."
+
         },
 
         {
+
             title: "Full Meal",
-            text: "If you're ready for a meal, combine foods from different families."
+
+            text:
+                "If you're ready for a meal, combine foods from different families."
+
         }
 
     ];
@@ -1080,7 +1047,7 @@ function renderRecoveryOptions() {
 
 /* =========================================
    FUEL CHECK-IN
-   ========================================= */
+========================================= */
 
 document.getElementById(
     "saveCheckinBtn"
@@ -1123,7 +1090,7 @@ function saveCheckin() {
 
 /* =========================================
    PROGRESS
-   ========================================= */
+========================================= */
 
 function renderFamilyProgress() {
 
@@ -1174,11 +1141,15 @@ function renderFamilyProgress() {
 
                 </div>
 
+
                 <div class="progress-bar">
 
                     <div
+
                         class="progress-fill"
+
                         style="width:${percentage}%"
+
                     ></div>
 
                 </div>
@@ -1223,7 +1194,7 @@ function renderProgress() {
 
 /* =========================================
    INITIALIZE
-   ========================================= */
+========================================= */
 
 renderFamilyButtons();
 
