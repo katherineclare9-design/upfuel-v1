@@ -1,67 +1,72 @@
 /* =========================================
    UPFUEL — MAIN STYLES
-========================================= */
+   ========================================= */
+
+
+/* =========================================
+   COLOR SYSTEM
+   ========================================= */
 
 :root {
 
     --black: #000000;
-    --dark-gray: #151515;
+
+    --dark-gray: #1a1a1a;
+
     --gray: #3a3a3a;
+
     --light-gray: #999999;
+
     --white: #ffffff;
+
     --pink: #ff2d8d;
-    --pink-light: #ff6eae;
-    --border: #292929;
 
 }
 
 
-* {
+/* =========================================
+   GLOBAL
+   ========================================= */
 
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
 }
-
 
 html {
-
     min-height: 100%;
-
 }
-
 
 body {
 
     background: var(--black);
+
     color: var(--white);
+
     min-height: 100vh;
+
     font-family: Arial, Helvetica, sans-serif;
 
 }
 
-
 button {
 
     font-family: inherit;
+
     cursor: pointer;
 
 }
 
 
-input,
-select,
-textarea {
-
-    font-family: inherit;
-
-}
-
+/* =========================================
+   APP
+   ========================================= */
 
 #app {
 
     min-height: 100vh;
+
     background: var(--black);
 
 }
@@ -69,15 +74,15 @@ textarea {
 
 /* =========================================
    SCREENS
-========================================= */
+   ========================================= */
 
 .screen {
 
     display: none;
+
     min-height: 100vh;
 
 }
-
 
 .screen.active {
 
@@ -87,27 +92,35 @@ textarea {
 
 
 /* =========================================
-   INTRO
-========================================= */
+   INTRO SCREEN
+   ========================================= */
 
 #introScreen {
 
     align-items: center;
+
     justify-content: center;
+
     text-align: center;
+
     background: var(--black);
+
     padding: 30px;
 
 }
 
-
 .intro-content {
 
     width: 100%;
+
     max-width: 600px;
 
 }
 
+
+/* =========================================
+   LOGO
+   ========================================= */
 
 .logo-container {
 
@@ -115,24 +128,30 @@ textarea {
 
 }
 
-
 .logo {
 
     font-size: clamp(3rem, 10vw, 6rem);
+
     font-weight: 900;
+
     letter-spacing: 8px;
+
     color: var(--white);
 
 }
 
-
 .logo::after {
 
     content: ".";
+
     color: var(--pink);
 
 }
 
+
+/* =========================================
+   INTRO TAGLINE
+   ========================================= */
 
 .intro-tagline {
 
@@ -140,16 +159,17 @@ textarea {
 
 }
 
-
 .intro-tagline h2 {
 
     font-size: clamp(1.2rem, 4vw, 2rem);
+
     font-weight: 800;
+
     letter-spacing: 2px;
+
     margin: 8px 0;
 
 }
-
 
 .intro-tagline h2:last-child {
 
@@ -160,55 +180,55 @@ textarea {
 
 /* =========================================
    BUTTONS
-========================================= */
-
-.primary-btn,
-.secondary-btn {
-
-    border: none;
-    background: var(--gray);
-    color: var(--white);
-    border-radius: 12px;
-    font-weight: 800;
-    letter-spacing: .5px;
-    transition: .2s ease;
-
-}
-
+   ========================================= */
 
 .primary-btn {
 
+    border: none;
+
+    background: var(--gray);
+
+    color: var(--white);
+
     padding: 16px 35px;
+
+    border-radius: 12px;
+
     font-size: 1rem;
 
-}
+    font-weight: 800;
 
+    letter-spacing: 1px;
 
-.secondary-btn {
-
-    padding: 13px 20px;
-    font-size: .85rem;
-    margin-top: 15px;
+    transition: 0.2s ease;
 
 }
 
-
-.primary-btn:hover,
-.secondary-btn:hover {
+.primary-btn:hover {
 
     background: var(--pink);
+
     transform: translateY(-2px);
+
+}
+
+.primary-btn:active {
+
+    transform: translateY(0);
 
 }
 
 
 /* =========================================
    MAIN APP
-========================================= */
+   ========================================= */
 
 #mainApp {
 
+    display: none;
+
     flex-direction: column;
+
     background: var(--black);
 
 }
@@ -216,663 +236,93 @@ textarea {
 
 /* =========================================
    HEADER
-========================================= */
+   ========================================= */
 
 .app-header {
 
     padding: 25px;
+
     border-bottom: 1px solid #242424;
 
 }
 
-
 .app-header h1 {
 
     color: var(--white);
+
     letter-spacing: 3px;
+
     font-size: 1.8rem;
 
 }
-
 
 .app-header h1::after {
 
     content: ".";
+
     color: var(--pink);
 
 }
-
 
 .app-header p {
 
     margin-top: 5px;
+
     color: var(--light-gray);
-    font-size: .9rem;
+
+    font-size: 0.9rem;
 
 }
 
 
 /* =========================================
-   PAGES
-========================================= */
+   HOME
+   ========================================= */
 
 .page {
 
     padding: 25px;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
 
 }
-
-
-.app-page {
-
-    display: none;
-    animation: pageFade .25s ease;
-
-}
-
-
-.app-page.active {
-
-    display: block;
-
-}
-
 
 .page h2 {
 
-    font-size: 2rem;
-    margin: 5px 0 10px;
+    font-size: 1.7rem;
 
-}
-
-
-.page-description {
-
-    color: var(--light-gray);
-    line-height: 1.5;
-    margin-bottom: 25px;
-
-}
-
-
-/* =========================================
-   WELCOME
-========================================= */
-
-.welcome-section {
-
-    margin-bottom: 25px;
-
-}
-
-
-.welcome-section h2 {
-
-    font-size: 2rem;
-    margin: 5px 0 10px;
-
-}
-
-
-.welcome-section p:last-child {
-
-    color: var(--light-gray);
-    line-height: 1.5;
-
-}
-
-
-/* =========================================
-   LABELS
-========================================= */
-
-.small-label {
-
-    color: var(--pink);
-    font-size: .75rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-
-}
-
-
-/* =========================================
-   CARDS
-========================================= */
-
-.dashboard-card {
-
-    background: var(--dark-gray);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 22px;
-    margin-bottom: 18px;
-
-}
-
-
-.dashboard-card h3 {
-
-    font-size: 1.25rem;
-    margin: 8px 0;
-
-}
-
-
-.dashboard-card p:not(.small-label) {
-
-    color: var(--light-gray);
-    line-height: 1.5;
-
-}
-
-
-.focus-card {
-
-    border-left: 4px solid var(--pink);
-
-}
-
-
-.uplift-card {
-
-    border-top: 2px solid var(--pink);
-
-}
-
-
-/* =========================================
-   STATS
-========================================= */
-
-.dashboard-grid {
-
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-    margin-bottom: 18px;
-
-}
-
-
-.dashboard-grid .dashboard-card {
-
-    margin-bottom: 0;
-
-}
-
-
-.stat-card {
-
-    min-height: 150px;
-
-}
-
-
-.stat-icon {
-
-    display: block;
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-
-}
-
-
-/* =========================================
-   QUICK ACTIONS
-========================================= */
-
-.quick-actions {
-
-    margin-top: 30px;
-
-}
-
-
-.quick-action-grid {
-
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-top: 12px;
-
-}
-
-
-.quick-action-grid .secondary-btn {
-
-    margin-top: 0;
-    min-height: 55px;
-
-}
-
-
-/* =========================================
-   INPUTS
-========================================= */
-
-.app-input {
-
-    width: 100%;
-    padding: 14px 16px;
-    background: var(--dark-gray);
-    color: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    outline: none;
-    margin: 8px 0 18px;
-
-}
-
-
-.app-input:focus {
-
-    border-color: var(--pink);
-
-}
-
-
-.app-input::placeholder {
-
-    color: #777777;
-
-}
-
-
-/* =========================================
-   FOOD FAMILIES
-========================================= */
-
-.food-family-buttons {
-
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    padding: 5px 0 15px;
-
-}
-
-
-.food-family-buttons::-webkit-scrollbar {
-
-    display: none;
-
-}
-
-
-.family-filter-btn {
-
-    white-space: nowrap;
-    background: var(--gray);
-    color: var(--white);
-    border: none;
-    border-radius: 999px;
-    padding: 10px 16px;
-    font-weight: 700;
-
-}
-
-
-.family-filter-btn.active {
-
-    background: var(--pink);
-
-}
-
-
-.family-cards {
-
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-
-}
-
-
-.family-card {
-
-    background: var(--dark-gray);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 18px;
-    cursor: pointer;
-    transition: .2s ease;
-
-}
-
-
-.family-card:hover {
-
-    border-color: var(--pink);
-    transform: translateY(-2px);
-
-}
-
-
-.family-card h3 {
-
-    margin-bottom: 7px;
-
-}
-
-
-.family-card p {
-
-    color: var(--light-gray);
-    font-size: .9rem;
-    line-height: 1.4;
-
-}
-
-
-/* =========================================
-   FOOD ITEMS
-========================================= */
-
-.food-list {
-
-    margin-top: 10px;
-
-}
-
-
-.food-item {
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    background: var(--dark-gray);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 15px;
     margin-bottom: 10px;
 
 }
 
+.page p {
 
-.food-info h3 {
-
-    margin-bottom: 4px;
-
-}
-
-
-.food-info p {
-
-    color: var(--light-gray);
-    font-size: .85rem;
-
-}
-
-
-.food-actions {
-
-    display: flex;
-    align-items: center;
-    gap: 5px;
-
-}
-
-
-.favorite-btn {
-
-    background: transparent;
-    color: #777777;
-    font-size: 1.3rem;
-    padding: 7px;
-
-}
-
-
-.favorite-btn.favorite {
-
-    color: var(--pink);
-
-}
-
-
-.food-status {
-
-    color: var(--pink);
-    font-size: .7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-
-}
-
-
-/* =========================================
-   MEAL BUILDER
-========================================= */
-
-.meal-food-option {
-
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: #202020;
-    border-radius: 12px;
-    padding: 10px;
-    margin: 8px 0;
-
-}
-
-
-.meal-food-option input {
-
-    width: 20px;
-    height: 20px;
-    accent-color: var(--pink);
-
-}
-
-
-.saved-meal {
-
-    background: #202020;
-    border-left: 4px solid var(--pink);
-    padding: 15px;
-    border-radius: 12px;
-    margin: 10px 0;
-
-}
-
-
-/* =========================================
-   PRE-CHEER
-========================================= */
-
-.fuel-time-grid {
-
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 20px;
-
-}
-
-
-.fuel-time-btn {
-
-    margin: 0;
-    min-height: 60px;
-
-}
-
-
-.fuel-result {
-
-    background: var(--dark-gray);
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--pink);
-    border-radius: 15px;
-    padding: 18px;
-    margin: 12px 0;
-
-}
-
-
-/* =========================================
-   RECOVERY
-========================================= */
-
-.recovery-option {
-
-    background: var(--dark-gray);
-    border: 1px solid var(--border);
-    border-radius: 15px;
-    padding: 18px;
-    margin: 12px 0;
-
-}
-
-
-.recovery-option h3 {
-
-    margin-bottom: 7px;
-
-}
-
-
-/* =========================================
-   CHECK-IN
-========================================= */
-
-.checkin-option {
-
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: #202020;
-    border-radius: 12px;
-    padding: 14px;
-    margin: 10px 0;
-    cursor: pointer;
-
-}
-
-
-.checkin-option input {
-
-    width: 20px;
-    height: 20px;
-    accent-color: var(--pink);
-
-}
-
-
-/* =========================================
-   PROGRESS
-========================================= */
-
-.family-progress-item {
-
-    margin: 15px 0;
-
-}
-
-
-.family-progress-label {
-
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 6px;
-
-}
-
-
-.progress-bar {
-
-    width: 100%;
-    height: 12px;
-    background: #303030;
-    border-radius: 20px;
-    overflow: hidden;
-
-}
-
-
-.progress-fill {
-
-    height: 100%;
-    border-radius: 20px;
-    background: var(--pink);
-    transition: width .3s ease;
-
-}
-
-
-/* =========================================
-   ANIMATION
-========================================= */
-
-@keyframes pageFade {
-
-    from {
-
-        opacity: 0;
-        transform: translateY(5px);
-
-    }
-
-    to {
-
-        opacity: 1;
-        transform: translateY(0);
-
-    }
+    color: #aaaaaa;
 
 }
 
 
 /* =========================================
    MOBILE
-========================================= */
+   ========================================= */
 
 @media (max-width: 600px) {
+
+    .intro-tagline {
+
+        margin-bottom: 35px;
+
+    }
+
+    .primary-btn {
+
+        width: 100%;
+
+        max-width: 300px;
+
+    }
 
     .page {
 
         padding: 20px;
-
-    }
-
-
-    .dashboard-grid {
-
-        grid-template-columns: 1fr;
-
-    }
-
-
-    .quick-action-grid {
-
-        grid-template-columns: 1fr;
-
-    }
-
-
-    .family-cards {
-
-        grid-template-columns: 1fr;
-
-    }
-
-
-    .fuel-time-grid {
-
-        grid-template-columns: 1fr;
-
-    }
-
-
-    .food-item {
-
-        align-items: flex-start;
 
     }
 
