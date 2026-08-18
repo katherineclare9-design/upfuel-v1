@@ -6,546 +6,39 @@
 
     <title>UpFuel</title>
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div id="app">
+    <!-- =========================
+         UPFUEL APP
+         ========================= -->
 
-    <!-- ================================
-         INTRO SCREEN
-    ================================= -->
+    <main id="app">
 
-    <section id="introScreen" class="screen active">
+        <!-- =========================
+             INTRO SCREEN
+             ========================= -->
 
-        <div class="intro-content">
+        <section id="introScreen" class="screen active">
 
-            <div class="logo-container">
-                <div class="logo">UPFUEL</div>
-            </div>
+            <div class="intro-content">
 
-            <div class="intro-tagline">
-                <h2>FUEL YOUR BODY.</h2>
-                <h2>UPLIFT YOUR PERFORMANCE.</h2>
-            </div>
-
-            <button class="primary-btn" onclick="startApp()">
-                GET STARTED
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================================
-         MAIN APP
-    ================================= -->
-
-    <section id="mainApp" class="screen">
-
-        <!-- HEADER -->
-
-        <header class="app-header">
-
-            <h1>UPFUEL</h1>
-
-            <p>
-                Fuel better. Train stronger. Feel better.
-            </p>
-
-        </header>
-
-
-        <!-- ================================
-             HOME
-        ================================= -->
-
-        <main id="homePage" class="app-page active">
-
-            <div class="page">
-
-                <div class="welcome-section">
-
-                    <span class="small-label">WELCOME BACK</span>
-
-                    <h2>Ready to Uplift?</h2>
-
-                    <p>
-                        Keep building strength, fueling your body,
-                        and improving your cheer performance.
-                    </p>
-
+                <!-- Logo -->
+                <div class="logo-container">
+                    <h1 class="logo">UPFUEL</h1>
                 </div>
 
-
-                <div class="dashboard-card focus-card">
-
-                    <span class="small-label">TODAY'S FOCUS</span>
-
-                    <h3 id="dailyFocus">
-                        Fuel your performance
-                    </h3>
-
-                    <p>
-                        Give your body the energy and recovery it needs
-                        to perform at its best.
-                    </p>
-
+                <!-- Tagline -->
+                <div class="intro-tagline">
+                    <h2>FUEL YOUR BODY.</h2>
+                    <h2>POWER YOUR TRAINING.</h2>
                 </div>
 
-
-                <div class="dashboard-grid">
-
-                    <div class="dashboard-card stat-card">
-
-                        <span class="stat-icon">💪</span>
-
-                        <span class="small-label">
-                            STRENGTH
-                        </span>
-
-                        <h3 id="strengthStat">
-                            Building
-                        </h3>
-
-                        <p>
-                            Keep training consistently.
-                        </p>
-
-                    </div>
-
-
-                    <div class="dashboard-card stat-card">
-
-                        <span class="stat-icon">🥗</span>
-
-                        <span class="small-label">
-                            FOOD VARIETY
-                        </span>
-
-                        <h3 id="foodVarietyStat">
-                            Growing
-                        </h3>
-
-                        <p>
-                            Explore foods at your own pace.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="dashboard-card uplift-card">
-
-                    <span class="small-label">
-                        UPLIFT
-                    </span>
-
-                    <h3>
-                        Progress isn't perfection.
-                    </h3>
-
-                    <p>
-                        Every workout, meal, recovery day, and
-                        small step counts.
-                    </p>
-
-                </div>
-
-
-                <div class="quick-actions">
-
-                    <span class="small-label">
-                        QUICK ACTIONS
-                    </span>
-
-                    <div class="quick-action-grid">
-
-                        <button
-                            class="secondary-btn"
-                            onclick="showPage('foodPage')">
-                            FOOD EXPLORER
-                        </button>
-
-                        <button
-                            class="secondary-btn"
-                            onclick="showPage('mealPage')">
-                            BUILD A MEAL
-                        </button>
-
-                        <button
-                            class="secondary-btn"
-                            onclick="showPage('fuelPage')">
-                            PRE-CHEER FUEL
-                        </button>
-
-                        <button
-                            class="secondary-btn"
-                            onclick="showPage('checkinPage')">
-                            DAILY CHECK-IN
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </main>
-
-
-        <!-- ================================
-             FOOD EXPLORER
-        ================================= -->
-
-        <section id="foodPage" class="app-page">
-
-            <div class="page">
-
-                <span class="small-label">
-                    FOOD EXPLORER
-                </span>
-
-                <h2>Find Foods</h2>
-
-                <p class="page-description">
-                    Explore familiar foods and foods with similar
-                    textures, tastes, and characteristics.
-                </p>
-
-
-                <input
-                    id="foodSearch"
-                    class="app-input"
-                    type="text"
-                    placeholder="Search foods..."
-                    oninput="searchFoods()"
-                >
-
-
-                <div class="food-family-buttons">
-
-                    <button
-                        class="family-filter-btn active"
-                        onclick="filterFoodFamily('all', this)">
-                        All
-                    </button>
-
-                    <button
-                        class="family-filter-btn"
-                        onclick="filterFoodFamily('carbs', this)">
-                        Carbs
-                    </button>
-
-                    <button
-                        class="family-filter-btn"
-                        onclick="filterFoodFamily('protein', this)">
-                        Protein
-                    </button>
-
-                    <button
-                        class="family-filter-btn"
-                        onclick="filterFoodFamily('fruit', this)">
-                        Fruit
-                    </button>
-
-                    <button
-                        class="family-filter-btn"
-                        onclick="filterFoodFamily('vegetables', this)">
-                        Vegetables
-                    </button>
-
-                    <button
-                        class="family-filter-btn"
-                        onclick="filterFoodFamily('snacks', this)">
-                        Snacks
-                    </button>
-
-                </div>
-
-
-                <div id="foodFamilyCards" class="family-cards"></div>
-
-                <div id="foodList" class="food-list"></div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================================
-             MEAL BUILDER
-        ================================= -->
-
-        <section id="mealPage" class="app-page">
-
-            <div class="page">
-
-                <span class="small-label">
-                    MEAL BUILDER
-                </span>
-
-                <h2>Build Your Meal</h2>
-
-                <p class="page-description">
-                    Choose foods that feel comfortable and create
-                    a balanced meal that works for you.
-                </p>
-
-
-                <div id="mealFoodList"></div>
-
-
-                <button
-                    class="primary-btn"
-                    onclick="saveMeal()">
-                    SAVE MEAL
-                </button>
-
-
-                <div class="dashboard-card" style="margin-top:25px;">
-
-                    <span class="small-label">
-                        SAVED MEALS
-                    </span>
-
-                    <div id="savedMeals"></div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================================
-             PRE-CHEER FUEL
-        ================================= -->
-
-        <section id="fuelPage" class="app-page">
-
-            <div class="page">
-
-                <span class="small-label">
-                    PRE-CHEER
-                </span>
-
-                <h2>Fuel Before Practice</h2>
-
-                <p class="page-description">
-                    How soon are you practicing?
-                </p>
-
-
-                <div class="fuel-time-grid">
-
-                    <button
-                        class="secondary-btn fuel-time-btn"
-                        onclick="showFuelOptions('15-30')">
-                        15–30 MIN
-                    </button>
-
-                    <button
-                        class="secondary-btn fuel-time-btn"
-                        onclick="showFuelOptions('30-60')">
-                        30–60 MIN
-                    </button>
-
-                    <button
-                        class="secondary-btn fuel-time-btn"
-                        onclick="showFuelOptions('1-2')">
-                        1–2 HOURS
-                    </button>
-
-                </div>
-
-
-                <div
-                    id="fuelResult"
-                    class="fuel-result"
-                    style="display:none;">
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================================
-             RECOVERY
-        ================================= -->
-
-        <section id="recoveryPage" class="app-page">
-
-            <div class="page">
-
-                <span class="small-label">
-                    RECOVERY
-                </span>
-
-                <h2>Recover Strong</h2>
-
-                <p class="page-description">
-                    Recovery is part of training.
-                </p>
-
-
-                <div class="recovery-option">
-
-                    <h3>💧 Hydration</h3>
-
-                    <p>
-                        Keep fluids available throughout the day
-                        and around practice.
-                    </p>
-
-                </div>
-
-
-                <div class="recovery-option">
-
-                    <h3>🍽️ Refuel</h3>
-
-                    <p>
-                        Have a familiar snack or meal after training
-                        to support recovery.
-                    </p>
-
-                </div>
-
-
-                <div class="recovery-option">
-
-                    <h3>😴 Rest</h3>
-
-                    <p>
-                        Rest days and sleep help your body recover
-                        and get stronger.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================================
-             DAILY CHECK-IN
-        ================================= -->
-
-        <section id="checkinPage" class="app-page">
-
-            <div class="page">
-
-                <span class="small-label">
-                    DAILY CHECK-IN
-                </span>
-
-                <h2>How Are You Feeling?</h2>
-
-                <p class="page-description">
-                    Check in with your body and your energy today.
-                </p>
-
-
-                <div class="dashboard-card">
-
-                    <h3>⚡ Energy</h3>
-
-                    <label class="checkin-option">
-                        <input
-                            type="radio"
-                            name="energy"
-                            value="low">
-                        Low
-                    </label>
-
-                    <label class="checkin-option">
-                        <input
-                            type="radio"
-                            name="energy"
-                            value="okay">
-                        Okay
-                    </label>
-
-                    <label class="checkin-option">
-                        <input
-                            type="radio"
-                            name="energy"
-                            value="high">
-                        High
-                    </label>
-
-                </div>
-
-
-                <div class="dashboard-card">
-
-                    <h3>😊 Mood</h3>
-
-                    <label class="checkin-option">
-                        <input
-                            type="radio"
-                            name="mood"
-                            value="low">
-                        Not great
-                    </label>
-
-                    <label class="checkin-option">
-                        <input
-                            type="radio"
-                            name="mood"
-                            value="okay">
-                        Okay
-                    </label>
-
-                    <label class="checkin-option">
-                        <input
-                            type="radio"
-                            name="mood"
-                            value="good">
-                        Good
-                    </label>
-
-                </div>
-
-
-                <div class="dashboard-card">
-
-                    <h3>💪 Recovery</h3>
-
-                    <label class="checkin-option">
-                        <input
-                            type="checkbox"
-                            id="practiceFuel">
-                        I fueled around practice
-                    </label>
-
-                    <label class="checkin-option">
-                        <input
-                            type="checkbox"
-                            id="hydration">
-                        I stayed hydrated
-                    </label>
-
-                    <label class="checkin-option">
-                        <input
-                            type="checkbox"
-                            id="rest">
-                        I gave myself time to recover
-                    </label>
-
-                </div>
-
-
-                <button
-                    class="primary-btn"
-                    onclick="saveCheckin()">
-                    SAVE CHECK-IN
+                <!-- Continue Button -->
+                <button id="introNextBtn" class="primary-btn">
+                    LET'S GO
                 </button>
 
             </div>
@@ -553,181 +46,48 @@
         </section>
 
 
-        <!-- ================================
-             PROGRESS
-        ================================= -->
+        <!-- =========================
+             MAIN APP
+             ========================= -->
 
-        <section id="progressPage" class="app-page">
+        <section id="mainApp" class="screen">
 
-            <div class="page">
+            <header class="app-header">
 
-                <span class="small-label">
-                    PROGRESS
-                </span>
+                <div>
+                    <h1>UPFUEL</h1>
 
-                <h2>Your Progress</h2>
-
-                <p class="page-description">
-                    Track strength, food variety, flexibility,
-                    and performance.
-                </p>
-
-
-                <div class="dashboard-card">
-
-                    <div class="family-progress-item">
-
-                        <div class="family-progress-label">
-
-                            <span>💪 Strength</span>
-
-                            <span id="strengthProgressText">
-                                0%
-                            </span>
-
-                        </div>
-
-                        <div class="progress-bar">
-
-                            <div
-                                id="strengthProgress"
-                                class="progress-fill"
-                                style="width:0%;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="family-progress-item">
-
-                        <div class="family-progress-label">
-
-                            <span>🥗 Food Variety</span>
-
-                            <span id="foodProgressText">
-                                0%
-                            </span>
-
-                        </div>
-
-                        <div class="progress-bar">
-
-                            <div
-                                id="foodProgress"
-                                class="progress-fill"
-                                style="width:0%;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="family-progress-item">
-
-                        <div class="family-progress-label">
-
-                            <span>🤸 Flexibility</span>
-
-                            <span id="flexibilityProgressText">
-                                0%
-                            </span>
-
-                        </div>
-
-                        <div class="progress-bar">
-
-                            <div
-                                id="flexibilityProgress"
-                                class="progress-fill"
-                                style="width:0%;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
+                    <p>
+                        Fuel your body. Power your training.
+                    </p>
                 </div>
+
+            </header>
+
+
+            <!-- =========================
+                 HOME PAGE
+                 ========================= -->
+
+            <div id="homePage" class="page active">
+
+                <h2>
+                    Welcome to UpFuel
+                </h2>
+
+                <p>
+                    Your personalized fueling and nutrition space.
+                </p>
 
             </div>
 
         </section>
 
-
-        <!-- ================================
-             BOTTOM NAVIGATION
-        ================================= -->
-
-        <nav
-            id="bottomNav"
-            style="
-                position:fixed;
-                bottom:0;
-                left:0;
-                width:100%;
-                background:#151515;
-                border-top:1px solid #292929;
-                display:flex;
-                justify-content:space-around;
-                padding:10px 5px;
-                z-index:1000;
-            ">
-
-            <button
-                class="secondary-btn"
-                onclick="showPage('homePage')">
-                🏠
-                <br>
-                Home
-            </button>
-
-            <button
-                class="secondary-btn"
-                onclick="showPage('foodPage')">
-                🥗
-                <br>
-                Food
-            </button>
-
-            <button
-                class="secondary-btn"
-                onclick="showPage('fuelPage')">
-                ⚡
-                <br>
-                Fuel
-            </button>
-
-            <button
-                class="secondary-btn"
-                onclick="showPage('progressPage')">
-                📈
-                <br>
-                Progress
-            </button>
-
-            <button
-                class="secondary-btn"
-                onclick="showPage('checkinPage')">
-                ❤️
-                <br>
-                Check-In
-            </button>
-
-        </nav>
-
-    </section>
-
-</div>
+    </main>
 
 
-<!-- ================================
-     JAVASCRIPT
-================================ -->
-
-<script src="foodDatabase.js"></script>
-<script src="script.js"></script>
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 
 </body>
 </html>
