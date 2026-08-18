@@ -30,6 +30,23 @@ let upfuelData = JSON.parse(
 };
 
 
+/* Protect against missing data from older versions */
+
+upfuelData.favorites ||= [];
+upfuelData.foodStatus ||= {};
+upfuelData.savedMeals ||= [];
+
+upfuelData.fuelCheckin ||= {
+
+    beforeTraining: false,
+
+    afterTraining: false,
+
+    energy: false
+
+};
+
+
 function saveData() {
 
     localStorage.setItem(
@@ -54,15 +71,22 @@ const introNextBtn =
     document.getElementById("introNextBtn");
 
 
-introNextBtn.addEventListener("click", () => {
+if (introNextBtn) {
 
-    introScreen.classList.remove("active");
+    introNextBtn.addEventListener(
+        "click",
+        () => {
 
-    mainApp.classList.add("active");
+            introScreen.classList.remove("active");
 
-    renderHome();
+            mainApp.classList.add("active");
 
-});
+            renderHome();
+
+        }
+    );
+
+}
 
 
 /* =========================================
@@ -104,11 +128,16 @@ function showPage(pageId) {
 document.querySelectorAll("[data-page]")
     .forEach(button => {
 
-        button.addEventListener("click", () => {
+        button.addEventListener(
+            "click",
+            () => {
 
-            showPage(button.dataset.page);
+                showPage(
+                    button.dataset.page
+                );
 
-        });
+            }
+        );
 
     });
 
@@ -120,25 +149,52 @@ document.querySelectorAll("[data-page]")
 function renderHome() {
 
     const totalFoods =
-        Object.values(upfuelData.foodStatus)
-            .filter(status => status === "comfortable")
-            .length;
+        Object.values(
+            upfuelData.foodStatus
+        )
+        .filter(
+            status =>
+                status === "comfortable"
+        )
+        .length;
 
 
     const favoriteCount =
         upfuelData.favorites.length;
 
 
-    document.getElementById(
-        "homeFoodVariety"
-    ).textContent =
-        `${totalFoods} foods`;
+    const foodVariety =
+        document.getElementById(
+            "homeFoodVariety"
+        );
 
 
-    document.getElementById(
-        "homeFavorites"
-    ).textContent =
-        `${favoriteCount} foods`;
+    const favorites =
+        document.getElementById(
+            "homeFavorites"
+        );
+
+
+    const fuelStatus =
+        document.getElementById(
+            "homeFuelStatus"
+        );
+
+
+    if (foodVariety) {
+
+        foodVariety.textContent =
+            `${totalFoods} foods`;
+
+    }
+
+
+    if (favorites) {
+
+        favorites.textContent =
+            `${favoriteCount} foods`;
+
+    }
 
 
     const checkin =
@@ -156,12 +212,14 @@ function renderHome() {
     ].filter(Boolean).length;
 
 
-    document.getElementById(
-        "homeFuelStatus"
-    ).textContent =
-        completed === 0
-            ? "Not checked"
-            : `${completed}/3`;
+    if (fuelStatus) {
+
+        fuelStatus.textContent =
+            completed === 0
+                ? "Not checked"
+                : `${completed}/3`;
+
+    }
 
 }
 
@@ -177,6 +235,9 @@ const foodFamilyButtons =
 
 
 function renderFamilyButtons() {
+
+    if (!foodFamilyButtons) return;
+
 
     foodFamilyButtons.innerHTML = "";
 
@@ -235,7 +296,9 @@ function renderFamilyButtons() {
                         button
                     );
 
-                    renderFoods(family);
+                    renderFoods(
+                        family
+                    );
 
                 }
             );
@@ -256,12 +319,16 @@ function setActiveFamilyButton(button) {
         ".family-filter-btn"
     ).forEach(btn => {
 
-        btn.classList.remove("active");
+        btn.classList.remove(
+            "active"
+        );
 
     });
 
 
-    button.classList.add("active");
+    button.classList.add(
+        "active"
+    );
 
 }
 
@@ -271,40 +338,64 @@ function setActiveFamilyButton(button) {
 ========================================= */
 
 const foodSearch =
-    document.getElementById("foodSearch");
+    document.getElementById(
+        "foodSearch"
+    );
 
 
-foodSearch.addEventListener(
-    "input",
-    () => {
+if (foodSearch) {
 
-        renderFoods();
+    foodSearch.addEventListener(
+        "input",
+        () => {
 
-    }
-);
+            renderFoods();
+
+        }
+    );
+
+}
 
 
 function getAllFoods() {
 
     const foods = [];
 
+    const seenFoods =
+        new Set();
+
 
     Object.entries(foodFamilies)
-        .forEach(([family, items]) => {
+        .forEach(
+            ([family, items]) => {
 
-            items.forEach(food => {
+                items.forEach(food => {
 
-                foods.push({
+                    /*
+                     Prevent duplicate foods
+                     from appearing multiple times.
+                    */
 
-                    name: food,
+                    if (
+                        !seenFoods.has(food)
+                    ) {
 
-                    family: family
+                        seenFoods.add(food);
+
+                        foods.push({
+
+                            name: food,
+
+                            family: family
+
+                        });
+
+                    }
 
                 });
 
-            });
-
-        });
+            }
+        );
 
 
     return foods;
@@ -312,7 +403,9 @@ function getAllFoods() {
 }
 
 
-function renderFoods(selectedFamily = null) {
+function renderFoods(
+    selectedFamily = null
+) {
 
     const foodList =
         document.getElementById(
@@ -320,32 +413,52 @@ function renderFoods(selectedFamily = null) {
         );
 
 
-    let foods =
-        selectedFamily
-            ? foodFamilies[selectedFamily]
-                .map(food => ({
+    if (!foodList) return;
 
-                    name: food,
 
-                    family: selectedFamily
+    let foods;
 
-                }))
-            : getAllFoods();
+
+    if (selectedFamily) {
+
+        foods =
+            foodFamilies[
+                selectedFamily
+            ].map(food => ({
+
+                name: food,
+
+                family: selectedFamily
+
+            }));
+
+    }
+
+    else {
+
+        foods =
+            getAllFoods();
+
+    }
 
 
     const search =
-        foodSearch.value
-            .trim()
-            .toLowerCase();
+        foodSearch
+            ? foodSearch.value
+                .trim()
+                .toLowerCase()
+            : "";
 
 
     if (search) {
 
-        foods = foods.filter(food =>
-            food.name
-                .toLowerCase()
-                .includes(search)
-        );
+        foods =
+            foods.filter(
+                food =>
+                    food.name
+                        .toLowerCase()
+                        .includes(search)
+            );
 
     }
 
@@ -359,12 +472,16 @@ function renderFoods(selectedFamily = null) {
 
             <section class="dashboard-card">
 
+                <p class="small-label">
+                    FOOD EXPLORER
+                </p>
+
                 <h3>
                     No foods found
                 </h3>
 
                 <p>
-                    Try another search.
+                    Try another search or food family.
                 </p>
 
             </section>
@@ -379,7 +496,9 @@ function renderFoods(selectedFamily = null) {
     foods.forEach(food => {
 
         const item =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         item.className =
@@ -394,7 +513,15 @@ function renderFoods(selectedFamily = null) {
 
         const isFavorite =
             upfuelData.favorites
-                .includes(food.name);
+                .includes(
+                    food.name
+                );
+
+
+        const statusLabel =
+            status === "unrated"
+                ? "Not rated"
+                : status;
 
 
         item.innerHTML = `
@@ -409,19 +536,11 @@ function renderFoods(selectedFamily = null) {
                     ${food.family}
                 </p>
 
-                ${
-                    status !== "unrated"
-                    ? `
+                <span class="food-status">
 
-                        <span class="food-status">
+                    ${statusLabel}
 
-                            ${status}
-
-                        </span>
-
-                    `
-                    : ""
-                }
+                </span>
 
             </div>
 
@@ -436,7 +555,13 @@ function renderFoods(selectedFamily = null) {
                             : ""
                     }"
 
-                    data-food="${food.name}"
+                    data-food="${
+                        food.name
+                    }"
+
+                    aria-label="Favorite ${
+                        food.name
+                    }"
 
                 >
 
@@ -449,14 +574,16 @@ function renderFoods(selectedFamily = null) {
 
                     class="secondary-btn"
 
-                    data-comfort="${food.name}"
+                    data-comfort="${
+                        food.name
+                    }"
 
                 >
 
                     ${
-                        status === "comfortable"
-                            ? "COMFORTABLE"
-                            : "SET"
+                        status === "unrated"
+                            ? "SET"
+                            : status.toUpperCase()
                     }
 
                 </button>
@@ -466,23 +593,45 @@ function renderFoods(selectedFamily = null) {
         `;
 
 
-        item.querySelector(
-            ".favorite-btn"
-        ).addEventListener(
+        const favoriteButton =
+            item.querySelector(
+                ".favorite-btn"
+            );
+
+
+        const statusButton =
+            item.querySelector(
+                "[data-comfort]"
+            );
+
+
+        favoriteButton.addEventListener(
             "click",
-            () => toggleFavorite(food.name)
+            () => {
+
+                toggleFavorite(
+                    food.name
+                );
+
+            }
         );
 
 
-        item.querySelector(
-            "[data-comfort]"
-        ).addEventListener(
+        statusButton.addEventListener(
             "click",
-            () => cycleFoodStatus(food.name)
+            () => {
+
+                cycleFoodStatus(
+                    food.name
+                );
+
+            }
         );
 
 
-        foodList.appendChild(item);
+        foodList.appendChild(
+            item
+        );
 
     });
 
@@ -502,7 +651,9 @@ function toggleFavorite(food) {
 
     if (index === -1) {
 
-        upfuelData.favorites.push(food);
+        upfuelData.favorites.push(
+            food
+        );
 
     }
 
@@ -532,13 +683,16 @@ function toggleFavorite(food) {
 function cycleFoodStatus(food) {
 
     const current =
-        upfuelData.foodStatus[food];
+        upfuelData.foodStatus[
+            food
+        ];
 
 
     if (!current) {
 
-        upfuelData.foodStatus[food] =
-            "comfortable";
+        upfuelData.foodStatus[
+            food
+        ] = "comfortable";
 
     }
 
@@ -546,8 +700,9 @@ function cycleFoodStatus(food) {
         current === "comfortable"
     ) {
 
-        upfuelData.foodStatus[food] =
-            "familiar";
+        upfuelData.foodStatus[
+            food
+        ] = "familiar";
 
     }
 
@@ -555,14 +710,17 @@ function cycleFoodStatus(food) {
         current === "familiar"
     ) {
 
-        upfuelData.foodStatus[food] =
-            "new";
+        upfuelData.foodStatus[
+            food
+        ] = "new";
 
     }
 
     else {
 
-        delete upfuelData.foodStatus[food];
+        delete upfuelData.foodStatus[
+            food
+        ];
 
     }
 
@@ -574,6 +732,8 @@ function cycleFoodStatus(food) {
     renderHome();
 
     renderFamilyProgress();
+
+    renderFamilyCards();
 
 }
 
@@ -590,84 +750,142 @@ function renderFamilyCards() {
         );
 
 
+    if (!container) return;
+
+
     container.innerHTML = "";
 
 
     Object.entries(foodFamilies)
-        .forEach(([family, foods]) => {
+        .forEach(
+            ([family, foods]) => {
 
-            const comfortable =
-                foods.filter(food =>
-                    upfuelData.foodStatus[food]
-                    === "comfortable"
-                ).length;
-
-
-            const card =
-                document.createElement("div");
-
-
-            card.className =
-                "family-card";
+                const comfortable =
+                    foods.filter(
+                        food =>
+                            upfuelData
+                                .foodStatus[
+                                    food
+                                ] ===
+                                "comfortable"
+                    ).length;
 
 
-            card.innerHTML = `
-
-                <h3>
-                    ${family}
-                </h3>
-
-                <p>
-                    ${foods.length} options
-                </p>
-
-                <p>
-                    ${comfortable} comfortable
-                </p>
-
-            `;
+                const familiar =
+                    foods.filter(
+                        food =>
+                            upfuelData
+                                .foodStatus[
+                                    food
+                                ] ===
+                                "familiar"
+                    ).length;
 
 
-            card.addEventListener(
-                "click",
-                () => {
+                const newFoods =
+                    foods.filter(
+                        food =>
+                            upfuelData
+                                .foodStatus[
+                                    food
+                                ] ===
+                                "new"
+                    ).length;
 
-                    showPage("foodPage");
 
-                    foodSearch.value = "";
+                const card =
+                    document.createElement(
+                        "div"
+                    );
 
 
-                    document.querySelectorAll(
-                        ".family-filter-btn"
-                    ).forEach(btn => {
+                card.className =
+                    "family-card";
 
-                        btn.classList.remove(
-                            "active"
+
+                card.innerHTML = `
+
+                    <h3>
+                        ${family}
+                    </h3>
+
+                    <p>
+                        ${foods.length} options
+                    </p>
+
+                    <p>
+                        ${comfortable} comfortable
+                    </p>
+
+                    <p>
+                        ${familiar} familiar
+                        ·
+                        ${newFoods} new
+                    </p>
+
+                `;
+
+
+                card.addEventListener(
+                    "click",
+                    () => {
+
+                        showPage(
+                            "foodPage"
                         );
 
 
-                        if (
-                            btn.textContent === family
-                        ) {
+                        if (foodSearch) {
 
-                            btn.classList.add(
-                                "active"
-                            );
+                            foodSearch.value =
+                                "";
 
                         }
 
-                    });
+
+                        document
+                            .querySelectorAll(
+                                ".family-filter-btn"
+                            )
+                            .forEach(
+                                btn => {
+
+                                    btn.classList
+                                        .remove(
+                                            "active"
+                                        );
 
 
-                    renderFoods(family);
+                                    if (
+                                        btn.textContent
+                                        === family
+                                    ) {
 
-                }
-            );
+                                        btn.classList
+                                            .add(
+                                                "active"
+                                            );
+
+                                    }
+
+                                }
+                            );
 
 
-            container.appendChild(card);
+                        renderFoods(
+                            family
+                        );
 
-        });
+                    }
+                );
+
+
+                container.appendChild(
+                    card
+                );
+
+            }
+        );
 
 }
 
@@ -684,49 +902,66 @@ function renderMealFoodOptions() {
         );
 
 
+    if (!container) return;
+
+
     container.innerHTML = "";
 
 
-    getAllFoods().forEach(food => {
+    getAllFoods().forEach(
+        food => {
 
-        const label =
-            document.createElement("label");
-
-
-        label.className =
-            "meal-food-option";
-
-
-        label.innerHTML = `
-
-            <input
-
-                type="checkbox"
-
-                value="${food.name}"
-
-            >
-
-            <span>
-                ${food.name}
-            </span>
-
-        `;
+            const label =
+                document.createElement(
+                    "label"
+                );
 
 
-        container.appendChild(label);
+            label.className =
+                "meal-food-option";
 
-    });
+
+            label.innerHTML = `
+
+                <input
+
+                    type="checkbox"
+
+                    value="${food.name}"
+
+                >
+
+                <span>
+                    ${food.name}
+                </span>
+
+            `;
+
+
+            container.appendChild(
+                label
+            );
+
+        }
+    );
 
 }
 
 
-document.getElementById(
-    "saveMealBtn"
-).addEventListener(
-    "click",
-    saveMeal
-);
+const saveMealButton =
+    document.getElementById(
+        "saveMealBtn"
+    );
+
+
+if (saveMealButton) {
+
+    saveMealButton.addEventListener(
+        "click",
+        saveMeal
+    );
+
+}
 
 
 function saveMeal() {
@@ -742,12 +977,17 @@ function saveMeal() {
             ...document.querySelectorAll(
                 "#mealFoodOptions input:checked"
             )
-        ].map(
-            input => input.value
+        ]
+        .map(
+            input =>
+                input.value
         );
 
 
-    if (!name || foods.length === 0) {
+    if (
+        !name ||
+        foods.length === 0
+    ) {
 
         alert(
             "Add a meal name and at least one food."
@@ -775,13 +1015,18 @@ function saveMeal() {
     ).value = "";
 
 
-    document.querySelectorAll(
-        "#mealFoodOptions input"
-    ).forEach(input => {
+    document
+        .querySelectorAll(
+            "#mealFoodOptions input"
+        )
+        .forEach(
+            input => {
 
-        input.checked = false;
+                input.checked =
+                    false;
 
-    });
+            }
+        );
 
 
     renderSavedMeals();
@@ -797,11 +1042,15 @@ function renderSavedMeals() {
         );
 
 
+    if (!container) return;
+
+
     container.innerHTML = "";
 
 
     if (
-        upfuelData.savedMeals.length === 0
+        upfuelData.savedMeals
+            .length === 0
     ) {
 
         container.innerHTML =
@@ -813,32 +1062,76 @@ function renderSavedMeals() {
 
 
     upfuelData.savedMeals
-        .forEach(meal => {
+        .forEach(
+            (meal, index) => {
 
-            const item =
-                document.createElement("div");
-
-
-            item.className =
-                "saved-meal";
-
-
-            item.innerHTML = `
-
-                <h3>
-                    ${meal.name}
-                </h3>
-
-                <p>
-                    ${meal.foods.join(", ")}
-                </p>
-
-            `;
+                const item =
+                    document.createElement(
+                        "div"
+                    );
 
 
-            container.appendChild(item);
+                item.className =
+                    "saved-meal";
 
-        });
+
+                item.innerHTML = `
+
+                    <h3>
+                        ${meal.name}
+                    </h3>
+
+                    <p>
+                        ${meal.foods.join(
+                            ", "
+                        )}
+                    </p>
+
+                    <button
+                        class="secondary-btn"
+                        data-delete-meal="${index}"
+                    >
+                        REMOVE
+                    </button>
+
+                `;
+
+
+                item.querySelector(
+                    "[data-delete-meal]"
+                ).addEventListener(
+                    "click",
+                    () => {
+
+                        deleteMeal(
+                            index
+                        );
+
+                    }
+                );
+
+
+                container.appendChild(
+                    item
+                );
+
+            }
+        );
+
+}
+
+
+function deleteMeal(index) {
+
+    upfuelData.savedMeals.splice(
+        index,
+        1
+    );
+
+
+    saveData();
+
+    renderSavedMeals();
 
 }
 
@@ -859,19 +1152,19 @@ const preCheerIdeas = {
 
         "Toast",
 
-        "Granola bar"
+        "Granola Bar"
 
     ],
 
     later: [
 
-        "Greek yogurt + fruit",
+        "Greek Yogurt + Fruit",
 
-        "Peanut butter toast",
+        "Peanut Butter Toast",
 
-        "Cereal + milk",
+        "Cereal + Milk",
 
-        "Turkey sandwich",
+        "Turkey Sandwich",
 
         "Smoothie"
 
@@ -879,15 +1172,15 @@ const preCheerIdeas = {
 
     meal: [
 
-        "Rice + chicken + fruit",
+        "Rice + Chicken + Fruit",
 
-        "Pasta + protein + fruit",
+        "Pasta + Protein + Fruit",
 
-        "Bagel + eggs + fruit",
+        "Bagel + Eggs + Fruit",
 
-        "Potato + chicken + vegetable",
+        "Potato + Chicken + Vegetable",
 
-        "Rice bowl + protein"
+        "Rice Bowl + Protein"
 
     ]
 
@@ -896,20 +1189,22 @@ const preCheerIdeas = {
 
 document.querySelectorAll(
     ".fuel-time-btn"
-).forEach(button => {
+).forEach(
+    button => {
 
-    button.addEventListener(
-        "click",
-        () => {
+        button.addEventListener(
+            "click",
+            () => {
 
-            renderPreCheer(
-                button.dataset.time
-            );
+                renderPreCheer(
+                    button.dataset.time
+                );
 
-        }
-    );
+            }
+        );
 
-});
+    }
+);
 
 
 function renderPreCheer(time) {
@@ -918,6 +1213,9 @@ function renderPreCheer(time) {
         document.getElementById(
             "preCheerResults"
         );
+
+
+    if (!container) return;
 
 
     container.innerHTML = `
@@ -938,32 +1236,38 @@ function renderPreCheer(time) {
 
 
     preCheerIdeas[time]
-        .forEach(idea => {
+        .forEach(
+            idea => {
 
-            const item =
-                document.createElement("div");
-
-
-            item.className =
-                "fuel-result";
-
-
-            item.innerHTML = `
-
-                <h3>
-                    ${idea}
-                </h3>
-
-                <p>
-                    A simple option to consider before training.
-                </p>
-
-            `;
+                const item =
+                    document.createElement(
+                        "div"
+                    );
 
 
-            container.appendChild(item);
+                item.className =
+                    "fuel-result";
 
-        });
+
+                item.innerHTML = `
+
+                    <h3>
+                        ${idea}
+                    </h3>
+
+                    <p>
+                        A simple option to consider before training.
+                    </p>
+
+                `;
+
+
+                container.appendChild(
+                    item
+                );
+
+            }
+        );
 
 }
 
@@ -980,11 +1284,15 @@ function renderRecoveryOptions() {
         );
 
 
+    if (!container) return;
+
+
     const options = [
 
         {
 
-            title: "Protein + Carbohydrate",
+            title:
+                "Protein + Carbohydrate",
 
             text:
                 "Try pairing a protein food with a carbohydrate food you enjoy."
@@ -993,7 +1301,8 @@ function renderRecoveryOptions() {
 
         {
 
-            title: "Easy Snack",
+            title:
+                "Easy Snack",
 
             text:
                 "Choose a familiar snack such as yogurt and fruit, cereal and milk, or a sandwich."
@@ -1002,7 +1311,8 @@ function renderRecoveryOptions() {
 
         {
 
-            title: "Full Meal",
+            title:
+                "Full Meal",
 
             text:
                 "If you're ready for a meal, combine foods from different families."
@@ -1015,32 +1325,38 @@ function renderRecoveryOptions() {
     container.innerHTML = "";
 
 
-    options.forEach(option => {
+    options.forEach(
+        option => {
 
-        const item =
-            document.createElement("div");
-
-
-        item.className =
-            "recovery-option";
-
-
-        item.innerHTML = `
-
-            <h3>
-                ${option.title}
-            </h3>
-
-            <p>
-                ${option.text}
-            </p>
-
-        `;
+            const item =
+                document.createElement(
+                    "div"
+                );
 
 
-        container.appendChild(item);
+            item.className =
+                "recovery-option";
 
-    });
+
+            item.innerHTML = `
+
+                <h3>
+                    ${option.title}
+                </h3>
+
+                <p>
+                    ${option.text}
+                </p>
+
+            `;
+
+
+            container.appendChild(
+                item
+            );
+
+        }
+    );
 
 }
 
@@ -1049,12 +1365,20 @@ function renderRecoveryOptions() {
    FUEL CHECK-IN
 ========================================= */
 
-document.getElementById(
-    "saveCheckinBtn"
-).addEventListener(
-    "click",
-    saveCheckin
-);
+const saveCheckinButton =
+    document.getElementById(
+        "saveCheckinBtn"
+    );
+
+
+if (saveCheckinButton) {
+
+    saveCheckinButton.addEventListener(
+        "click",
+        saveCheckin
+    );
+
+}
 
 
 function saveCheckin() {
@@ -1100,66 +1424,84 @@ function renderFamilyProgress() {
         );
 
 
+    if (!container) return;
+
+
     container.innerHTML = "";
 
 
     Object.entries(foodFamilies)
-        .forEach(([family, foods]) => {
+        .forEach(
+            ([family, foods]) => {
 
-            const comfortable =
-                foods.filter(food =>
-                    upfuelData.foodStatus[food]
-                    === "comfortable"
-                ).length;
+                const comfortable =
+                    foods.filter(
+                        food =>
+                            upfuelData
+                                .foodStatus[
+                                    food
+                                ] ===
+                                "comfortable"
+                    ).length;
 
 
-            const percentage =
-                Math.round(
-                    (comfortable / foods.length) * 100
+                const percentage =
+                    Math.round(
+                        (
+                            comfortable /
+                            foods.length
+                        ) * 100
+                    );
+
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "family-progress-item";
+
+
+                item.innerHTML = `
+
+                    <div class="family-progress-label">
+
+                        <span>
+                            ${family}
+                        </span>
+
+                        <span>
+                            ${comfortable}/${foods.length}
+                        </span>
+
+                    </div>
+
+
+                    <div class="progress-bar">
+
+                        <div
+
+                            class="progress-fill"
+
+                            style="
+                                width:${percentage}%
+                            "
+
+                        ></div>
+
+                    </div>
+
+                `;
+
+
+                container.appendChild(
+                    item
                 );
 
-
-            const item =
-                document.createElement("div");
-
-
-            item.className =
-                "family-progress-item";
-
-
-            item.innerHTML = `
-
-                <div class="family-progress-label">
-
-                    <span>
-                        ${family}
-                    </span>
-
-                    <span>
-                        ${comfortable}/${foods.length}
-                    </span>
-
-                </div>
-
-
-                <div class="progress-bar">
-
-                    <div
-
-                        class="progress-fill"
-
-                        style="width:${percentage}%"
-
-                    ></div>
-
-                </div>
-
-            `;
-
-
-            container.appendChild(item);
-
-        });
+            }
+        );
 
 }
 
@@ -1184,10 +1526,18 @@ function renderProgress() {
     ].filter(Boolean).length;
 
 
-    document.getElementById(
-        "progressCheckin"
-    ).textContent =
-        `${completed}/3 fuel check-in habits completed.`;
+    const progressCheckin =
+        document.getElementById(
+            "progressCheckin"
+        );
+
+
+    if (progressCheckin) {
+
+        progressCheckin.textContent =
+            `${completed}/3 fuel check-in habits completed.`;
+
+    }
 
 }
 
