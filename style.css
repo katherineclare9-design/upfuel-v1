@@ -276,26 +276,215 @@ button {
 
 
 /* =========================================
-   HOME
+   HOME PAGE
    ========================================= */
 
 .page {
 
     padding: 25px;
 
-}
+    width: 100%;
 
-.page h2 {
+    max-width: 1100px;
 
-    font-size: 1.7rem;
-
-    margin-bottom: 10px;
+    margin: 0 auto;
 
 }
 
-.page p {
 
-    color: #aaaaaa;
+/* =========================================
+   WELCOME
+   ========================================= */
+
+.welcome-section {
+
+    margin-bottom: 25px;
+
+}
+
+.welcome-section h2 {
+
+    font-size: 2rem;
+
+    margin: 5px 0 10px;
+
+}
+
+.welcome-section p:last-child {
+
+    color: var(--light-gray);
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================
+   SMALL LABELS
+   ========================================= */
+
+.small-label {
+
+    color: var(--pink);
+
+    font-size: 0.75rem;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* =========================================
+   DASHBOARD CARDS
+   ========================================= */
+
+.dashboard-card {
+
+    background: var(--dark-gray);
+
+    border: 1px solid #292929;
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    margin-bottom: 18px;
+
+}
+
+.dashboard-card h3 {
+
+    font-size: 1.25rem;
+
+    margin: 8px 0;
+
+}
+
+.dashboard-card p:not(.small-label) {
+
+    color: var(--light-gray);
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================
+   FOCUS CARD
+   ========================================= */
+
+.focus-card {
+
+    border-left: 4px solid var(--pink);
+
+}
+
+
+/* =========================================
+   STAT GRID
+   ========================================= */
+
+.dashboard-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 18px;
+
+}
+
+.dashboard-grid .dashboard-card {
+
+    margin-bottom: 0;
+
+}
+
+.stat-card {
+
+    min-height: 150px;
+
+}
+
+.stat-icon {
+
+    display: block;
+
+    font-size: 1.8rem;
+
+    margin-bottom: 15px;
+
+}
+
+
+/* =========================================
+   SECONDARY BUTTONS
+   ========================================= */
+
+.secondary-btn {
+
+    border: none;
+
+    background: var(--gray);
+
+    color: var(--white);
+
+    padding: 13px 20px;
+
+    border-radius: 10px;
+
+    font-size: 0.85rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+
+    margin-top: 15px;
+
+    transition: 0.2s ease;
+
+}
+
+.secondary-btn:hover {
+
+    background: var(--pink);
+
+    transform: translateY(-2px);
+
+}
+
+
+/* =========================================
+   QUICK ACTIONS
+   ========================================= */
+
+.quick-actions {
+
+    margin-top: 30px;
+
+}
+
+.quick-action-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 12px;
+
+    margin-top: 12px;
+
+}
+
+.quick-action-grid .secondary-btn {
+
+    margin-top: 0;
+
+    min-height: 55px;
 
 }
 
@@ -323,6 +512,18 @@ button {
     .page {
 
         padding: 20px;
+
+    }
+
+    .dashboard-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .quick-action-grid {
+
+        grid-template-columns: 1fr;
 
     }
 
