@@ -2,7 +2,31 @@
    UPFUEL — MAIN STYLES
    ========================================= */
 
-/* ---------- GLOBAL ---------- */
+
+/* =========================================
+   COLOR SYSTEM
+   ========================================= */
+
+:root {
+
+    --black: #000000;
+
+    --dark-gray: #1a1a1a;
+
+    --gray: #3a3a3a;
+
+    --light-gray: #999999;
+
+    --white: #ffffff;
+
+    --pink: #ff2d8d;
+
+}
+
+
+/* =========================================
+   GLOBAL
+   ========================================= */
 
 * {
     margin: 0;
@@ -10,181 +34,296 @@
     box-sizing: border-box;
 }
 
+html {
+    min-height: 100%;
+}
+
 body {
-    background: #000000;
-    color: #ffffff;
-    font-family: Arial, Helvetica, sans-serif;
+
+    background: var(--black);
+
+    color: var(--white);
+
     min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 button {
+
     font-family: inherit;
+
     cursor: pointer;
+
 }
 
 
-/* ---------- APP ---------- */
+/* =========================================
+   APP
+   ========================================= */
 
 #app {
+
     min-height: 100vh;
-    background: #000000;
+
+    background: var(--black);
+
 }
 
 
-/* ---------- SCREENS ---------- */
+/* =========================================
+   SCREENS
+   ========================================= */
 
 .screen {
+
     display: none;
+
     min-height: 100vh;
+
 }
 
 .screen.active {
+
     display: flex;
+
 }
 
 
-/* ---------- INTRO ---------- */
+/* =========================================
+   INTRO SCREEN
+   ========================================= */
 
 #introScreen {
+
     align-items: center;
+
     justify-content: center;
+
     text-align: center;
-    background: #000000;
+
+    background: var(--black);
+
     padding: 30px;
+
 }
 
 .intro-content {
+
     width: 100%;
+
     max-width: 600px;
+
 }
 
 
-/* ---------- LOGO ---------- */
+/* =========================================
+   LOGO
+   ========================================= */
 
 .logo-container {
+
     margin-bottom: 35px;
+
 }
 
 .logo {
+
     font-size: clamp(3rem, 10vw, 6rem);
+
     font-weight: 900;
+
     letter-spacing: 8px;
-    color: #ffffff;
+
+    color: var(--white);
+
 }
 
 .logo::after {
+
     content: ".";
-    color: #ff2d8d;
+
+    color: var(--pink);
+
 }
 
 
-/* ---------- TAGLINE ---------- */
+/* =========================================
+   INTRO TAGLINE
+   ========================================= */
 
 .intro-tagline {
+
     margin-bottom: 45px;
+
 }
 
 .intro-tagline h2 {
+
     font-size: clamp(1.2rem, 4vw, 2rem);
+
     font-weight: 800;
+
     letter-spacing: 2px;
+
     margin: 8px 0;
+
 }
 
 .intro-tagline h2:last-child {
-    color: #ff2d8d;
+
+    color: var(--pink);
+
 }
 
 
-/* ---------- BUTTONS ---------- */
+/* =========================================
+   BUTTONS
+   ========================================= */
 
 .primary-btn {
+
     border: none;
-    background: #3a3a3a;
-    color: #ffffff;
+
+    background: var(--gray);
+
+    color: var(--white);
+
     padding: 16px 35px;
+
     border-radius: 12px;
+
     font-size: 1rem;
+
     font-weight: 800;
+
     letter-spacing: 1px;
+
     transition: 0.2s ease;
+
 }
 
 .primary-btn:hover {
-    background: #ff2d8d;
+
+    background: var(--pink);
+
     transform: translateY(-2px);
+
 }
 
 .primary-btn:active {
+
     transform: translateY(0);
+
 }
 
 
-/* ---------- MAIN APP ---------- */
+/* =========================================
+   MAIN APP
+   ========================================= */
 
 #mainApp {
+
     display: none;
+
     flex-direction: column;
-    background: #000000;
+
+    background: var(--black);
+
 }
 
 
-/* ---------- HEADER ---------- */
+/* =========================================
+   HEADER
+   ========================================= */
 
 .app-header {
+
     padding: 25px;
+
     border-bottom: 1px solid #242424;
+
 }
 
 .app-header h1 {
-    color: #ffffff;
+
+    color: var(--white);
+
     letter-spacing: 3px;
+
     font-size: 1.8rem;
+
 }
 
 .app-header h1::after {
+
     content: ".";
-    color: #ff2d8d;
+
+    color: var(--pink);
+
 }
 
 .app-header p {
+
     margin-top: 5px;
-    color: #999999;
+
+    color: var(--light-gray);
+
     font-size: 0.9rem;
+
 }
 
 
-/* ---------- HOME ---------- */
+/* =========================================
+   HOME
+   ========================================= */
 
 .page {
+
     padding: 25px;
+
 }
 
 .page h2 {
+
     font-size: 1.7rem;
+
     margin-bottom: 10px;
+
 }
 
 .page p {
+
     color: #aaaaaa;
+
 }
 
 
-/* ---------- MOBILE ---------- */
+/* =========================================
+   MOBILE
+   ========================================= */
 
 @media (max-width: 600px) {
 
     .intro-tagline {
+
         margin-bottom: 35px;
+
     }
 
     .primary-btn {
+
         width: 100%;
+
         max-width: 300px;
+
     }
 
     .page {
+
         padding: 20px;
+
     }
 
 }
