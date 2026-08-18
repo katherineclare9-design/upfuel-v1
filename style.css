@@ -225,8 +225,6 @@ button {
 
 #mainApp {
 
-    display: none;
-
     flex-direction: column;
 
     background: var(--black);
